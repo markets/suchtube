@@ -1,0 +1,23 @@
+{
+  "name": "slucktube",
+  "version": "0.1.0",
+  "description": "Search Youtube videos as a service",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "keywords": [
+    "slack",
+    "slack-command",
+    "youtube",
+    "api",
+    "service"
+  ],
+  "author": "Marc Anguera Insa @markets",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0",
+    "youtube-search": "^1.0.10"
+  }
+}
