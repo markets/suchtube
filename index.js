@@ -9,21 +9,22 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 const server = app.listen(process.env.PORT || 3333, () => {
-  console.log('Express server listening on port %d in %s mode', server.address().port, app.settings.env);
+  console.log('SuchTube server listening on port %d in %s mode', server.address().port, app.settings.env);
 });
 
 app.all('/:format?', (req, res) => {
-  var opts = {
+  var format = req.params.format;
+  var query = format == "slack" ? req.body.text : req.query.q;
+  var youtube_api_options = {
     maxResults: 1,
     key: process.env.YOUTUBE_DATA_API_V3
   };
 
-  console.log(req.body.text);
+  console.log(query);
 
-  search(req.body.text, opts, function(err, results) {
+  search(query, youtube_api_options, function(err, results) {
     if (err) return console.log(err);
 
-    var format = req.params.format;
     var video = results[0];
 
     if (format == 'slack') {
@@ -39,7 +40,7 @@ app.all('/:format?', (req, res) => {
     } else if (format == 'html' || format == null) {
       var link = video.link;
       res.send(
-        '<h1>Slucktube</h1>' +
+        '<h1>SuchTube</h1>' +
         '<h2>' + video.title + '</h2>' +
         '<a href="' + link + '" target="_blank">' + link + '</a>'
       );

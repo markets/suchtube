@@ -1,17 +1,19 @@
 {
-  "name": "slucktube",
+  "name": "suchtube",
   "version": "0.1.0",
-  "description": "Search Youtube videos as a service",
+  "description": "Search YouTube videos as a service",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "dev": "nodemon index.js"
   },
   "keywords": [
     "slack",
     "slack-command",
     "youtube",
     "api",
-    "service"
+    "service",
+    "cli"
   ],
   "author": "Marc Anguera Insa @markets",
   "license": "MIT",
@@ -19,5 +21,8 @@
     "body-parser": "^1.15.2",
     "express": "^4.14.0",
     "youtube-search": "^1.0.10"
+  },
+  "devDependencies": {
+    "nodemon": "^1.12.1"
   }
 }
