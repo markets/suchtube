@@ -15,6 +15,17 @@ const server = app.listen(process.env.PORT || 3333, () => {
 app.all('/:format?', (req, res) => {
   var format = req.params.format;
   var query = format == "slack" ? req.body.text : req.query.q;
+
+  // Parse timestamp (query format is /suchtube video_query --t=start_in_seconds)
+  var timestamp = '0';
+  var timeFormat = /--t=/;
+  var splittedQuery = query.split(timeFormat);
+
+  if (splittedQuery.length == 2) {
+    query = splittedQuery[0];
+    timestamp = splittedQuery[1].match(/\d+/);
+  }
+
   var youtube_api_options = {
     maxResults: 1,
     key: process.env.YOUTUBE_DATA_API_V3
@@ -30,15 +41,15 @@ app.all('/:format?', (req, res) => {
     if (format == 'slack') {
       var slack_json = {
         response_type: 'in_channel',
-        text: video.link
+        text: video.link + '&t=' + timestamp
       };
       res.json(slack_json);
     } else if (format == 'text') {
-      res.send(video.link);
+      res.send(video.link + '&t=' + timestamp);
     } else if (format == 'json') {
       res.send(video);
     } else if (format == 'html' || format == null) {
-      var link = video.link;
+      var link = video.link + '&t=' + timestamp;
       res.send(
         '<h1>SuchTube</h1>' +
         '<h2>' + video.title + '</h2>' +
