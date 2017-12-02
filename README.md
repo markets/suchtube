@@ -1,6 +1,6 @@
 # SuchTube
 
-:construction: :construction:
+**WIP** :construction: :construction:
 
 Search YouTube videos as a service:
 
@@ -8,7 +8,7 @@ Search YouTube videos as a service:
 - json
 - text
 - slack
-- cli
+- cli (not yet)
 
 ## Usage
 
@@ -16,11 +16,17 @@ Search YouTube videos as a service:
 - Run `npm install`
 - Run `npm start`
 
+## Contributing
+
+Any kind of idea, suggestion or bug report are really welcome! Just fork the repo, make your hack and send a pull request.
+
+Thanks to all contributors, you rock :metal:
+
 ## Development
 
 Start the server in development mode:
 
-    npm dev
+    npm run dev
 
 ## License
 
