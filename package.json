@@ -1,16 +1,17 @@
 {
   "name": "suchtube",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Search YouTube videos as a service",
-  "main": "index.js",
+  "bin": "bin/suchtube.js",
   "scripts": {
-    "start": "node index.js",
-    "dev": "nodemon index.js"
+    "start": "node ./src/server.js",
+    "dev": "nodemon --inspect ./src/server.js"
   },
   "keywords": [
     "slack",
     "slack-command",
     "youtube",
+    "search",
     "api",
     "service",
     "cli"

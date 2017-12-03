@@ -2,19 +2,53 @@
 
 **WIP** :construction: :construction:
 
-Search YouTube videos as a service:
+> Youtube Search as a service
 
-- html
-- json
-- text
-- slack
-- cli (not yet)
+SuchTube is a server and a CLI app to search videos on YouTube.
 
-## Usage
+The server responds to multiple formats, even comes with Slack integration:
+
+- `html` at `GET /search.html?q=cats`
+- `json` at `GET /search.json?q=cats`
+- `text` at `GET /search.text?q=cats`
+- `slack` at `POST /search.slack` + Slack payload
+
+The CLI allows you to search videos without leaving the terminal:
+
+    > suchtube "Funny cats"
+    https://www.youtube.com/watch?v=WEkSYw3o5is
+
+Or start the server:
+
+    > suchtube server
+
+## Installation
+
+**Requirements**
+
+- Node.js
+- YouTube Data API key (should be loaded in current shell as an environment variable named `YOUTUBE_DATA_API_V3`)
+
+Via npm:
+
+    > npm install -g suchtube
+    > suchtube -h
+
+Via GitHub:
 
 - Clone this repo
 - Run `npm install`
 - Run `npm start`
+
+## Options
+
+- `--t=10`
+
+Starts the video at the given time in seconds
+
+- `--random` [not available yet]
+
+Returns a random video taking into account the given topic
 
 ## Contributing
 
@@ -26,7 +60,7 @@ Thanks to all contributors, you rock :metal:
 
 Start the server in development mode:
 
-    npm run dev
+    > npm run dev
 
 ## License
 
