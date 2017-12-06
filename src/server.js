@@ -57,7 +57,7 @@ app.all('/search.:format?', (req, res) => {
           `<h1>SuchTube</h1>
           <h2>${videoTitle}</h2>`;
 
-        if (!video) {
+        if (video) {
           html += `<a href="${videoLink}" target="_blank">${videoLink}</a>`;
         }
 

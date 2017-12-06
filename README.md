@@ -2,8 +2,6 @@
 
 [![](https://img.shields.io/npm/v/suchtube.svg?style=flat-square)](https://www.npmjs.com/package/suchtube)
 
-**WIP** :construction: :construction:
-
 > Youtube Search as a service
 
 SuchTube is a Server and a CLI app to search videos on YouTube.
@@ -44,7 +42,7 @@ Via GitHub:
 
 ## Options
 
-Options using the CLI are available in the following formats: `--time=10` or `--time 10`. For the Server, you should pass your the options along with the query, inside the `q` paramater, ie: `?q=funny cats --time=10`.
+Options while using the CLI are available in the following formats: `--time=10` or `--time 10`. For the Server, you should pass the options along with the query, inside the `q` paramater, ie: `?q=funny cats --time=10`.
 
 - `--time=10`
 
@@ -56,7 +54,7 @@ Returns a random video taking into account the given topic.
 
 - `--open` (CLI only)
 
-Open the video in your browser.
+Opens the video in your browser.
 
 ## Contributing
 
