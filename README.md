@@ -1,12 +1,14 @@
 # SuchTube
 
+[![](https://img.shields.io/npm/v/suchtube.svg?style=flat-square)](https://www.npmjs.com/package/suchtube)
+
 **WIP** :construction: :construction:
 
 > Youtube Search as a service
 
-SuchTube is a server and a CLI app to search videos on YouTube.
+SuchTube is a Server and a CLI app to search videos on YouTube.
 
-The server responds to multiple formats, even comes with Slack integration:
+The Server responds to multiple formats, even comes with Slack integration:
 
 - `html` at `GET /search.html?q=cats`
 - `json` at `GET /search.json?q=cats`
@@ -15,12 +17,12 @@ The server responds to multiple formats, even comes with Slack integration:
 
 The CLI allows you to search videos without leaving the terminal:
 
-    > suchtube "Funny cats"
-    https://www.youtube.com/watch?v=WEkSYw3o5is
+    > suchtube funny cats
+    > suchtube football top goals --random --open
 
 Or start the server:
 
-    > suchtube server
+    > suchtube --server
 
 ## Installation
 
@@ -32,23 +34,29 @@ Or start the server:
 Via npm:
 
     > npm install -g suchtube
-    > suchtube -h
+    > suchtube --help
 
 Via GitHub:
 
-- Clone this repo
+- Clone this repo and `cd` into it.
 - Run `npm install`
 - Run `npm start`
 
 ## Options
 
-- `--t=10`
+Options using the CLI are available in the following formats: `--time=10` or `--time 10`. For the Server, you should pass your the options along with the query, inside the `q` paramater, ie: `?q=funny cats --time=10`.
 
-Starts the video at the given time in seconds
+- `--time=10`
 
-- `--random` [not available yet]
+Starts the video at the given time in seconds.
 
-Returns a random video taking into account the given topic
+- `--random`
+
+Returns a random video taking into account the given topic.
+
+- `--open` (CLI only)
+
+Open the video in your browser.
 
 ## Contributing
 
@@ -58,7 +66,7 @@ Thanks to all contributors, you rock :metal:
 
 ## Development
 
-Start the server in development mode:
+Start the server in development mode (`nodemon` + debugging):
 
     > npm run dev
 

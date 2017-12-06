@@ -1,24 +1,48 @@
 'use strict';
 
+const argv = require('yargs')
+  .locale('en')
+  .usage('Usage: suchtube query [options]')
+  .alias('version', 'v')
+  .alias('help', 'h')
+  .option('server', {
+    description: 'Start SuchTube server',
+  })
+  .option('random', {
+    description: 'Search a random video'
+  })
+  .option('time', {
+    alias: 't',
+    description: 'Start the video at the given time'
+  })
+  .option('open', {
+    alias: 'o',
+    description: 'Open the video in your browser'
+  })
+  .argv;
+
 exports.start = () => {
-  let query = process.argv.slice(2)[0];
-
-  if (query == 'server') {
-    const spawn = require('child_process').spawn;
-    const serverProcess = spawn('npm', ['start']);
-
-    serverProcess.stdout.on('data', (data) => {
-      console.log(`stdout: ${data}`);
-    });
-
-    serverProcess.stderr.on('data', (data) => {
-      console.log(`stderr: ${data}`);
-    });
+  if (argv.server) {
+    require('../src/server.js');
   } else {
     const search = require('../src/search.js');
+    const query = argv._.join();
 
-    search(query, ({ err, results }) => {
-      console.log(results[0].link);
-    });
+    search(query, argv)
+      .catch((err) => {
+        console.log(err);
+      })
+      .then((video) => {
+        if (!video) {
+          return console.log('Not found 乁(ツ)ㄏ')
+        }
+
+        if (argv.open) {
+          const opn = require('opn');
+          opn(video.link);
+        } else {
+          console.log(video.link);
+        }
+      });
   }
 };
