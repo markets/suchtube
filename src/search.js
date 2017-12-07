@@ -16,7 +16,7 @@ module.exports = (query, options) => {
     YTSearch(query, youtubeApiOptions, (err, videos) => {
       if (err) return reject(err);
 
-      let video = null;
+      let video;
 
       if (options.random) {
         video = videos[Math.floor((Math.random() * videos.length))];

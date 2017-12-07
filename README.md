@@ -56,6 +56,14 @@ Returns a random video taking into account the given topic.
 
 Opens the video in your browser.
 
+## Slack integration
+
+`/suchtube funny cats --random`
+
+To integrate SuchTube in your Slack workspace, read the following guides: https://api.slack.com/slash-commands.
+
+Basically, you should run the Server, make it publicly available via a URL and create a custom Slash Command pointing your instance URL.
+
 ## Contributing
 
 Any kind of idea, suggestion or bug report are really welcome! Just fork the repo, make your hack and send a pull request.
