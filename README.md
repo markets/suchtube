@@ -1,6 +1,6 @@
 # SuchTube
 
-[![](https://img.shields.io/npm/v/suchtube.svg?style=flat-square)](https://www.npmjs.com/package/suchtube)
+[![](https://img.shields.io/npm/v/suchtube.svg?style=flat-square)](https://www.npmjs.com/package/suchtube) [![](https://img.shields.io/travis/markets/suchtube.svg?style=flat-square)](https://travis-ci.org/markets/suchtube)
 
 > Youtube Search as a service
 
@@ -77,6 +77,10 @@ Thanks to all contributors, you rock :metal:
 Start the server in development mode (`nodemon` + debugging):
 
     > npm run dev
+
+Run tests:
+
+    > npm test
 
 ## License
 
