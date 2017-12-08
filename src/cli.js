@@ -7,25 +7,27 @@ const argv = require('yargs')
   .alias('help', 'h')
   .option('server', {
     description: 'Start SuchTube server',
+    alias: 's'
   })
   .option('random', {
-    description: 'Search a random video'
+    description: 'Search a random video',
+    alias: 'r'
   })
   .option('time', {
-    alias: 't',
-    description: 'Start the video at the given time'
+    description: 'Start the video at the given time',
+    alias: 't'
   })
   .option('open', {
-    alias: 'o',
-    description: 'Open the video in your browser'
+    description: 'Open the video in your browser',
+    alias: 'o'
   })
   .argv;
 
 exports.start = () => {
   if (argv.server) {
-    require('../src/server.js');
+    require('./server.js');
   } else {
-    const search = require('../src/search.js');
+    const search = require('./search.js');
     const query = argv._.join();
 
     search(query, argv)

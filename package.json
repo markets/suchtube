@@ -17,6 +17,7 @@
     "cli"
   ],
   "author": "Marc Anguera Insa @markets",
+  "repository": "markets/suchtube",
   "license": "MIT",
   "dependencies": {
     "body-parser": "^1.15.2",

@@ -6,7 +6,7 @@
 
 SuchTube is a Server and a CLI app to search videos on YouTube.
 
-The Server responds to multiple formats, even comes with Slack integration:
+The Server responds to multiple formats, even comes with [Slack integration](#slack-integration):
 
 - `html` at `GET /search.html?q=cats`
 - `json` at `GET /search.json?q=cats`
@@ -18,7 +18,7 @@ The CLI allows you to search videos without leaving the terminal:
     > suchtube funny cats
     > suchtube football top goals --random --open
 
-Or start the server:
+Or start the Server:
 
     > suchtube --server
 
@@ -27,7 +27,7 @@ Or start the server:
 **Requirements**
 
 - Node.js
-- YouTube Data API key (should be loaded in current shell as an environment variable named `YOUTUBE_DATA_API_V3`)
+- YouTube Data API key: should be loaded in current shell as an environment variable named `SUCHTUBE_YOUTUBE_DATA_API_V3`.
 
 Via npm:
 
@@ -39,6 +39,8 @@ Via GitHub:
 - Clone this repo and `cd` into it.
 - Run `npm install`
 - Run `npm start`
+
+The Server listens by default on port 3333, if you want to change this, you can do it via the `SUCHTUBE_SERVER_PORT` environment variable.
 
 ## Options
 

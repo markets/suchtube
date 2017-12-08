@@ -5,7 +5,7 @@ const YTSearch = require('youtube-search');
 module.exports = (query, options) => {
   const youtubeApiOptions = {
     maxResults: options.random ? 20 : 1,
-    key: process.env.YOUTUBE_DATA_API_V3
+    key: process.env.SUCHTUBE_YOUTUBE_DATA_API_V3
   };
 
   if (!youtubeApiOptions.key || youtubeApiOptions.key == "") {

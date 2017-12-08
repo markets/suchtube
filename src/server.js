@@ -9,7 +9,7 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-const server = app.listen(process.env.PORT || 3333, () => {
+const server = app.listen(process.env.SUCHTUBE_SERVER_PORT || 3333, () => {
   console.log(
     `SuchTube server v${process.env.npm_package_version} listening
     on port ${server.address().port}
