@@ -9,10 +9,6 @@ const argv = require('yargs')
   .example('suchtube --server')
   .alias('version', 'v')
   .alias('help', 'h')
-  .option('server', {
-    description: 'Start SuchTube server',
-    alias: 's'
-  })
   .option('random', {
     description: 'Search a random video',
     alias: 'r'
@@ -25,10 +21,21 @@ const argv = require('yargs')
     description: 'Open the video in your browser',
     alias: 'o'
   })
+  .option('server', {
+    description: 'Start SuchTube server',
+    alias: 's'
+  })
+  .option('port', {
+    description: 'Port for SuchTube server',
+    number: true
+  })
   .argv;
 
 exports.start = async () => {
   if (argv.server) {
+    if (argv.port) {
+      process.env.SUCHTUBE_SERVER_PORT = argv.port
+    }
     require('./server');
   } else {
     const search = require('./search');
