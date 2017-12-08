@@ -1,11 +1,12 @@
 {
   "name": "suchtube",
   "version": "0.3.0",
-  "description": "Search YouTube videos as a service",
+  "description": "YouTube search as a service, with Slack integration and CLI",
   "bin": "bin/suchtube.js",
   "scripts": {
     "start": "node ./src/server.js",
-    "dev": "nodemon --inspect ./src/server.js"
+    "dev": "nodemon --inspect ./src/server.js",
+    "test": "ava ./test/test_*.js"
   },
   "keywords": [
     "slack",
@@ -20,13 +21,15 @@
   "repository": "markets/suchtube",
   "license": "MIT",
   "dependencies": {
+    "axios": "^0.17.1",
     "body-parser": "^1.15.2",
     "express": "^4.14.0",
     "opn": "^5.1.0",
-    "yargs": "^10.0.3",
-    "youtube-search": "^1.0.10"
+    "yargs": "^10.0.3"
   },
   "devDependencies": {
-    "nodemon": "^1.12.1"
+    "ava": "^0.24.0",
+    "nodemon": "^1.12.1",
+    "sinon": "^4.1.3"
   }
 }

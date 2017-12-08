@@ -3,6 +3,10 @@
 const argv = require('yargs')
   .locale('en')
   .usage('Usage: suchtube query [options]')
+  .example('suchtube funny cats')
+  .example('suchtube football top goals --open')
+  .example('suchtube top summer songs --random')
+  .example('suchtube --server')
   .alias('version', 'v')
   .alias('help', 'h')
   .option('server', {
@@ -23,28 +27,24 @@ const argv = require('yargs')
   })
   .argv;
 
-exports.start = () => {
+exports.start = async () => {
   if (argv.server) {
-    require('./server.js');
+    require('./server');
   } else {
-    const search = require('./search.js');
+    const search = require('./search');
     const query = argv._.join();
 
-    search(query, argv)
-      .catch((err) => {
-        console.log(err);
-      })
-      .then((video) => {
-        if (!video) {
-          return console.log('Not found 乁(ツ)ㄏ')
-        }
+    const video = await search(query, argv);
 
-        if (argv.open) {
-          const opn = require('opn');
-          opn(video.link);
-        } else {
-          console.log(video.link);
-        }
-      });
+    if (!video) {
+      return console.log('Not found 乁(ツ)ㄏ');
+    }
+
+    if (argv.open) {
+      const opn = require('opn');
+      opn(video.link);
+    } else {
+      console.log(video.link);
+    }
   }
 };

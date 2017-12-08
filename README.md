@@ -78,6 +78,10 @@ Start the server in development mode (`nodemon` + debugging):
 
     > npm run dev
 
+Run tests:
+
+    > npm test
+
 ## License
 
 Copyright (c) Marc Anguera Insa. SuchTube is released under the [MIT](LICENSE) License.

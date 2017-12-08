@@ -1,34 +1,25 @@
 'use strict';
 
-const YTSearch = require('youtube-search');
+const YouTubeSearch = require('./youtube-search');
 
-module.exports = (query, options) => {
-  const youtubeApiOptions = {
-    maxResults: options.random ? 20 : 1,
-    key: process.env.SUCHTUBE_YOUTUBE_DATA_API_V3
-  };
+module.exports = async (query, options) => {
+  options = options || {};
+  const videos = await YouTubeSearch.run(query, options);
 
-  if (!youtubeApiOptions.key || youtubeApiOptions.key == "") {
-    console.error('Whoops! You should setup your YouTube Data API key');
+  if (videos.length == 0) return;
+
+  let video;
+
+  if (options.random) {
+    let index = Math.floor((Math.random() * videos.length));
+    video = Object.assign({}, videos[index]);
+  } else {
+    video = Object.assign({}, videos[0]);
   }
 
-  return new Promise((resolve, reject) => {
-    YTSearch(query, youtubeApiOptions, (err, videos) => {
-      if (err) return reject(err);
+  if (options.time) {
+    video.link = video.link + '&t=' + options.time;
+  }
 
-      let video;
-
-      if (options.random) {
-        video = videos[Math.floor((Math.random() * videos.length))];
-      } else {
-        video = videos[0]
-      }
-
-      if (options.time) {
-        video.link = video.link + '&t=' + options.time;
-      }
-
-      resolve(video);
-    })
-  })
+  return video;
 }
