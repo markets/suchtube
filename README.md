@@ -22,12 +22,19 @@ Or start the Server:
 
     > suchtube --server
 
-## Installation
+## Installation and usage
 
-**Requirements**
+### Requirements
 
 - Node.js
-- YouTube Data API key: should be loaded in current shell as an environment variable named `SUCHTUBE_YOUTUBE_DATA_API_V3`.
+
+Currently this package officially supports (is tested against) Node v7+. If you need to manage different Node versions, a version manager is recommended: [creationix/nvm](https://github.com/creationix/nvm) or [tj/n](https://github.com/tj/n).
+
+- YouTube Data API key
+
+Should be loaded in current shell as an environment variable named `SUCHTUBE_YOUTUBE_DATA_API_V3`.
+
+### Install
 
 Via npm:
 
@@ -38,7 +45,8 @@ Via GitHub:
 
 - Clone this repo and `cd` into it.
 - Run `npm install`
-- Run `npm start`
+- Run `npm start` to start the Server
+- Run `bin/suchtube.js -h` to use the CLI
 
 The Server listens by default on port 3333, if you want to change this, you can do it via the `SUCHTUBE_SERVER_PORT` environment variable.
 
@@ -64,7 +72,7 @@ Opens the video in your browser.
 
 To integrate SuchTube in your Slack workspace, read the following guides: https://api.slack.com/slash-commands.
 
-Basically, you should run the Server, make it publicly available via a URL and create a custom Slash Command pointing your instance URL.
+Basically, you should run the Server, make it publicly available (via URL or IP) and create a custom Slash Command pointing your instance URL.
 
 ## Contributing
 
