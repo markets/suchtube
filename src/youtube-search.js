@@ -44,7 +44,7 @@ exports.run = async (query, options) => {
       title:        item.snippet.title,
       kind:         item.id.kind,
       description:  item.snippet.description,
-      thumbnails:   item.snippet.thumbnails,
+      thumbnail:    item.snippet.thumbnails.medium.url,
       publishedAt:  item.snippet.publishedAt,
       channelTitle: item.snippet.channelTitle
     }

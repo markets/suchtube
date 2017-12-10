@@ -53,16 +53,19 @@ app.all('/search.:format?', async (req, res) => {
     res.send(video);
   } else if (format == 'html' || format == null) {
     let html =
-      `<h1>SuchTube v${version}</h1>
+      `<html><body style="background-color: #ccc; padding: 2em; font-family: arial;">
+      <h1>SuchTube v${version}</h1>
       <h2>${videoTitle}</h2>`;
 
     if (video) {
       html +=
-        `<small>from ${video.channelTitle}</small>
+        `<small>${video.publishedAt} -- ${video.channelTitle}</small>
         <p>${video.description}</p>
         <p><a href="${videoLink}" target="_blank">${videoLink}</a></p>
         <iframe src="${video.linkEmbed}" width="640" height="360" frameborder="0"></iframe>`;
     }
+
+    html += '</body></html>'
 
     res.send(html);
   }
