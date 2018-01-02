@@ -72,13 +72,12 @@ You can use the SuchTube search as a library:
 
 ```js
 const suchtube = require('suchtube');
-const video = await suchtube('funny cats', { random: true });
 
-if (video) {
+suchtube('funny cats', { random: true }).then(video => {
   console.log(video.title);
   console.log(video.link);
   console.log(video.publishedAt);
-}
+});
 ```
 
 ## Slack integration
