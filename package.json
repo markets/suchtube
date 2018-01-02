@@ -2,10 +2,11 @@
   "name": "suchtube",
   "version": "0.4.2",
   "description": "YouTube search as a service, with Slack integration and CLI",
-  "bin": "bin/suchtube.js",
+  "bin": "bin/suchtube",
+  "main": "src/search.js",
   "scripts": {
-    "start": "node ./src/server.js",
-    "dev": "nodemon --inspect ./src/server.js",
+    "start": "./bin/suchtube --server",
+    "dev": "nodemon --inspect ./bin/suchtube --server",
     "test": "ava ./test/test_*.js"
   },
   "keywords": [
@@ -25,11 +26,11 @@
     "body-parser": "^1.15.2",
     "express": "^4.14.0",
     "opn": "^5.1.0",
-    "yargs": "^10.0.3"
+    "yargs": "^10.1.0"
   },
   "devDependencies": {
     "ava": "^0.24.0",
-    "nodemon": "^1.12.1",
+    "nodemon": "^1.14.7",
     "sinon": "^4.1.3"
   }
 }

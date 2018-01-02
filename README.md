@@ -28,7 +28,7 @@ Or start the Server:
 
 - Node.js
 
-Currently this package officially supports (is tested against) Node v7+. If you need to manage different Node versions, a version manager is recommended: [creationix/nvm](https://github.com/creationix/nvm) or [tj/n](https://github.com/tj/n).
+Currently this package officially supports (is tested against) Node v7+. If you need to manage different Node environments, a version manager (like [creationix/nvm](https://github.com/creationix/nvm) or [tj/n](https://github.com/tj/n)) is recommended.
 
 - YouTube Data API key
 
@@ -46,7 +46,7 @@ Via GitHub:
 - Clone this repo and `cd` into it.
 - Run `npm install`
 - Run `npm start` to start the Server
-- Run `bin/suchtube.js -h` to use the CLI
+- Run `bin/suchtube -h` to use the CLI
 
 The Server listens by default on port 3333, if you want to change this, you can do it via the `SUCHTUBE_SERVER_PORT` environment variable.
 
@@ -66,13 +66,28 @@ Returns a random video taking into account the given topic.
 
 Opens the video in your browser.
 
+## Usage as a library
+
+You can use the SuchTube search as a library:
+
+```js
+const suchtube = require('suchtube');
+const video = await suchtube('funny cats', { random: true });
+
+if (video) {
+  console.log(video.title);
+  console.log(video.link);
+  console.log(video.publishedAt);
+}
+```
+
 ## Slack integration
 
 `/suchtube funny cats --random`
 
 To integrate SuchTube in your Slack workspace, read the following guides: https://api.slack.com/slash-commands.
 
-Basically, you should run the Server, make it publicly available (via URL or IP) and create a custom Slash Command pointing your instance URL.
+Basically, you should run the Server, make it publicly available (via URL or IP) and create a custom Slash Command pointing to your instance URL.
 
 ## Contributing
 

@@ -7,7 +7,7 @@ const YouTubeSearch = require('../src/youtube-search');
 // Stub API calls
 const response = [{ link: "https://www.youtube.com/watch?v=WEkSYw3o5is" }];
 const stub = sinon.stub(YouTubeSearch, 'run')
-stub.withArgs('non-existent video').returns([]);
+stub.withArgs('non-existent-video').returns([]);
 stub.returns(response);
 
 test('search query', async t => {
@@ -21,6 +21,6 @@ test('search query with time', async t => {
 });
 
 test('search non-existent video', async t => {
-  let video = await search('non-existent video');
+  let video = await search('non-existent-video');
   t.falsy(video);
 });

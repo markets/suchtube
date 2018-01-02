@@ -1,5 +1,3 @@
-'use strict';
-
 const axios = require('axios');
 const URL = 'https://www.googleapis.com/youtube/v3/search';
 

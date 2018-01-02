@@ -1,9 +1,6 @@
-'use strict';
-
 const YouTubeSearch = require('./youtube-search');
 
-module.exports = async (query, options) => {
-  options = options || {};
+module.exports = async (query, options = {}) => {
   const videos = await YouTubeSearch.run(query, options);
 
   if (videos.length == 0) return;

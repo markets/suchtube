@@ -1,5 +1,3 @@
-'use strict';
-
 const express = require('express');
 const bodyParser = require('body-parser');
 const yargs = require('yargs');
@@ -11,26 +9,26 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 const version = process.env.npm_package_version;
 
-const server = app.listen(process.env.SUCHTUBE_SERVER_PORT || 3333, () => {
+exports.start = async () => {
+  const server = app.listen(process.env.SUCHTUBE_SERVER_PORT || 3333, () => {
   console.log(
     `SuchTube server v${version} listening
     on port ${server.address().port}
     in ${app.settings.env} mode \n`);
-});
-
-exports = server;
+  });
+};
 
 app.all('/search.:format?', async (req, res) => {
   const format = req.params.format;
   let query = (format == "slack") && (req.method == 'POST')
     ? req.body.text
     : req.query.q;
-  const argv = yargs.parse(query);
-  query = argv._.join(" ");
+  const args = yargs.parse(query);
+  query = args._.join(" ");
 
   console.log(`[LOG] format ${format} => ${query}\n`);
 
-  const video = await search(query, argv);
+  const video = await search(query, args);
 
   let videoLink, videoTitle;
 
