@@ -2,12 +2,11 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const yargs = require('yargs');
 const search = require('./search');
+const version = require('../package.json').version;
 
 const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-
-const version = process.env.npm_package_version;
 
 exports.start = async () => {
   const server = app.listen(process.env.SUCHTUBE_SERVER_PORT || 3333, () => {
