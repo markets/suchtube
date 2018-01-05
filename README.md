@@ -23,6 +23,8 @@ Or start the Server:
 
     > suchtube --server
 
+You can also use the search part [as a library](#usage-as-a-library).
+
 ## Installation and usage
 
 ### Requirements
@@ -72,13 +74,13 @@ Opens the video in your browser.
 You can use the SuchTube search as a library:
 
 ```js
-const suchtube = require('suchtube');
+const suchtube = require('suchtube')
 
-suchtube('funny cats', { random: true }).then(video => {
-  console.log(video.title);
-  console.log(video.link);
-  console.log(video.publishedAt);
-});
+suchtube.search('funny cats', { random: true }).then(video => {
+  console.log(video.title)
+  console.log(video.link)
+  console.log(video.publishedAt)
+})
 ```
 
 ## Slack integration
