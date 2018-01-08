@@ -7,7 +7,10 @@
   "scripts": {
     "start": "./bin/suchtube --server",
     "dev": "nodemon --inspect ./bin/suchtube --server",
-    "test": "ava ./test/test_*.js"
+    "test": "ava ./test/test_*.js",
+    "release:patch": "npm version patch && git push && git push --tags && npm publish",
+    "release:minor": "npm version minor && git push && git push --tags && npm publish",
+    "release:major": "npm version major && git push && git push --tags && npm publish"
   },
   "keywords": [
     "slack",

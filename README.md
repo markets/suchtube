@@ -31,7 +31,7 @@ You can also use the search part [as a library](#usage-as-a-library).
 
 - Node.js
 
-Currently this package officially supports (is tested against) Node v7+. If you need to manage different Node environments, a version manager (like [creationix/nvm](https://github.com/creationix/nvm) or [tj/n](https://github.com/tj/n)) is recommended.
+Currently this package officially supports (and is tested against) Node v8.3+. If you need to manage different Node environments, a version manager (like [creationix/nvm](https://github.com/creationix/nvm) or [tj/n](https://github.com/tj/n)) is recommended.
 
 - YouTube Data API key
 
