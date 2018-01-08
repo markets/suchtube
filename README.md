@@ -5,9 +5,9 @@
 
 > Youtube Search as a service
 
-SuchTube is a Server and a CLI app to search videos on YouTube.
+SuchTube is a server and a CLI app to search videos on YouTube.
 
-The Server responds to multiple formats, even comes with [Slack integration](#slack-integration):
+The server responds to multiple formats, even comes with [Slack integration](#slack-integration):
 
 - `html` at `GET /search.html?q=cats`
 - `json` at `GET /search.json?q=cats`
@@ -19,7 +19,7 @@ The CLI allows you to search videos without leaving the terminal:
     > suchtube funny cats
     > suchtube football top goals --random --open
 
-Or start the Server:
+Or start the server:
 
     > suchtube --server
 
@@ -48,14 +48,16 @@ Via GitHub:
 
 - Clone this repo and `cd` into it.
 - Run `npm install`
-- Run `npm start` to start the Server
+- Run `npm start` to start the server
 - Run `bin/suchtube -h` to use the CLI
 
-The Server listens by default on port 3333, if you want to change this, you can do it via the `SUCHTUBE_SERVER_PORT` environment variable.
+The server listens by default on port 3333, if you want to change this, you can do it via the `SUCHTUBE_SERVER_PORT` environment variable. If you're starting the server using the SuchTube CLI, you can also set the port by:
+
+    > suchtube --server --port 4444
 
 ## Options
 
-Options while using the CLI are available in the following formats: `--time=10` or `--time 10`. For the Server, you should pass the options along with the query, inside the `q` paramater, ie: `?q=funny cats --time=10`.
+Options while using the CLI are available in the following formats: `--time=10` or `--time 10`. For the server, you should pass the options along with the query, inside the `q` paramater, ie: `?q=funny cats --time=10`.
 
 - `--time=10`
 
@@ -68,6 +70,10 @@ Returns a random video taking into account the given topic.
 - `--open` (CLI only)
 
 Opens the video in your browser.
+
+- `--full` (CLI only)
+
+Displays full video's information. It corresponds to hit `GET /search.json?q=` against the server.
 
 ## Usage as a library
 
@@ -89,7 +95,7 @@ suchtube.search('funny cats', { random: true }).then(video => {
 
 To integrate SuchTube in your Slack workspace, read the following guides: https://api.slack.com/slash-commands.
 
-Basically, you should run the Server, make it publicly available (via URL or IP) and create a custom Slash Command pointing to your instance URL.
+Basically, you should run the server, make it publicly available (via URL or IP) and create a custom Slash Command pointing to your instance URL.
 
 ## Contributing
 

@@ -24,6 +24,10 @@ const args = yargs
     description: 'Open the video in your browser',
     alias: 'o'
   })
+  .option('full', {
+    description: 'Display full information',
+    alias: 'f'
+  })
   .option('server', {
     description: 'Start SuchTube server',
     alias: 's'
@@ -55,7 +59,11 @@ exports.start = async () => {
     if (args.open) {
       opn(video.link)
     } else {
-      console.log(video.link)
+      if (args.full) {
+        console.log(video)
+      } else {
+        console.log(video.link)
+      }
     }
   }
 }

@@ -16,6 +16,7 @@ exports.search = async (query, options = {}) => {
 
   if (options.time) {
     video.link = video.link + '&t=' + options.time
+    video.linkEmbed = video.linkEmbed + '?start=' + options.time
   }
 
   return video

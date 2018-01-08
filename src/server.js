@@ -18,14 +18,14 @@ exports.start = async () => {
 }
 
 app.all('/search.:format?', async (req, res) => {
-  const format = req.params.format
-  let query = (format == "slack") && (req.method == 'POST')
-    ? req.body.text
-    : req.query.q
-  const args = yargs.parse(query)
-  query = args._.join(" ")
+  const format = req.params.format || 'html'
+  const originalQuery = (format == "slack") && (req.method == 'POST')
+    ? (req.body.text || '')
+    : (req.query.q || '')
+  const args = yargs.parse(originalQuery)
+  const query = args._.join(" ")
 
-  console.log(`[LOG] format ${format} => ${query}\n`)
+  console.log(`[LOG] format: ${format} | query: ${originalQuery}\n`)
 
   const video = await search(query, args)
 
@@ -48,10 +48,11 @@ app.all('/search.:format?', async (req, res) => {
     res.send(videoLink)
   } else if (format == 'json') {
     res.send(video)
-  } else if (format == 'html' || format == null) {
+  } else if (format == 'html') {
     let html =
       `<html><body style="background-color: #ccc; padding: 2em; font-family: sans-serif;">
       <h1>SuchTube v${version}</h1>
+      <form action="/search"><input type="text" name="q" value="${originalQuery}" size="40"></form>
       <h2>${videoTitle}</h2>`
 
     if (video) {
