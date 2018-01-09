@@ -59,8 +59,11 @@ app.all('/search.:format?', async (req, res) => {
       html +=
         `<small>${video.publishedAt} -- ${video.channelTitle}</small>
         <p>${video.description}</p>
-        <p><a href="${videoLink}" target="_blank">${videoLink}</a></p>
-        <iframe src="${video.linkEmbed}" width="640" height="360" frameborder="0"></iframe>`
+        <p><a href="${videoLink}" target="_blank">${videoLink}</a></p>`
+
+      if (video.linkEmbed){
+        html += `<iframe src="${video.linkEmbed}" width="640" height="360" frameborder="0"></iframe>`
+      }
     }
 
     html += '</body></html>'

@@ -16,31 +16,35 @@ exports.run = async (query, options) => {
   const response = await axios.get(URL, { params })
 
   return response.data.items.map(item => {
-    let id, link, linkEmbed
+    let id, link, linkEmbed, kind
 
     switch (item.id.kind) {
       case 'youtube#channel':
         id = item.id.channelId
+        kind = 'channel'
         link = `https://www.youtube.com/channel/${id}`
+        linkEmbed = null
         break
       case 'youtube#playlist':
         id = item.id.playlistId
+        kind = 'playlist'
         link = `https://www.youtube.com/playlist?list=${id}`
+        linkEmbed = `https://www.youtube.com/embed?listType=playlist&list=${id}`
         break
       default:
         id = item.id.videoId
+        kind = 'video'
         link = `https://www.youtube.com/watch?v=${id}`
+        linkEmbed = `https://www.youtube.com/embed/${id}`
         break
     }
 
-    linkEmbed = `https://www.youtube.com/embed/${id}`
-
     return {
       id:           id,
+      kind:         kind,
       link:         link,
       linkEmbed:    linkEmbed,
       title:        item.snippet.title,
-      kind:         item.id.kind,
       description:  item.snippet.description,
       thumbnail:    item.snippet.thumbnails.medium.url,
       publishedAt:  item.snippet.publishedAt,

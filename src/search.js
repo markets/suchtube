@@ -14,9 +14,14 @@ exports.search = async (query, options = {}) => {
     video = {...videos[0]}
   }
 
-  if (options.time) {
+  if (options.time && video.kind != 'channel') {
     video.link = video.link + '&t=' + options.time
-    video.linkEmbed = video.linkEmbed + '?start=' + options.time
+
+    if (video.kind == 'video') {
+      video.linkEmbed = video.linkEmbed + '?start=' + options.time
+    } else {
+      video.linkEmbed = video.linkEmbed + '&start=' + options.time
+    }
   }
 
   return video
