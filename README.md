@@ -51,7 +51,7 @@ Via GitHub:
 - Run `npm start` to start the server
 - Run `bin/suchtube -h` to use the CLI
 
-The server listens by default on port 3333, if you want to change this, you can do it via the `SUCHTUBE_SERVER_PORT` environment variable. If you're starting the server using the SuchTube CLI, you can also set the port by:
+The server listens by default on port 3333, if you want to change this, you can do it via the `PORT` environment variable. If you're starting the server using the SuchTube CLI, you can also set the port by:
 
     > suchtube --server --port 4444
 

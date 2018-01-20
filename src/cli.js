@@ -41,7 +41,7 @@ const args = yargs
 exports.start = async () => {
   if (args.server) {
     if (args.port) {
-      process.env.SUCHTUBE_SERVER_PORT = args.port
+      process.env.PORT = args.port
     }
     server.start()
   } else {

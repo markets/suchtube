@@ -9,7 +9,7 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
 exports.start = async () => {
-  const server = app.listen(process.env.SUCHTUBE_SERVER_PORT || 3333, () => {
+  const server = app.listen(process.env.PORT || 3333, () => {
   console.log(
     `\nSuchTube server v${version} listening
     on port ${server.address().port}
