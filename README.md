@@ -57,21 +57,21 @@ The server listens by default on port 3333, if you want to change this, you can 
 
 ## Options
 
-Options while using the CLI are available in the following formats: `--time=10` or `--time 10`. For the server, you should pass the options along with the query, inside the `q` paramater, ie: `?q=funny cats --time=10`.
+Options while using the CLI are available in the following formats: `--time=10` or `--time 10`. For the server, you should pass the options along with the query, inside the `q` paramater, ie: `?q=funny+cats+--time=10`.
 
-- `--time=10`
+- `--time=10`, `-t=10`
 
 Starts the video at the given time in seconds.
 
-- `--random`
+- `--random`, `-r`
 
 Returns a random video taking into account the given topic.
 
-- `--open` (CLI only)
+- `--open`, `-o` *(CLI only)*
 
 Opens the video in your browser.
 
-- `--full` (CLI only)
+- `--full`, `-f` *(CLI only)*
 
 Displays full video's information. It corresponds to hit `GET /search.json?q=` against the server.
 

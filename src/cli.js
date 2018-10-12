@@ -58,6 +58,7 @@ exports.start = async () => {
 
     if (args.open) {
       opn(video.link)
+      process.exit()
     } else {
       if (args.full) {
         console.log(video)
