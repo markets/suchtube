@@ -1,6 +1,6 @@
 {
   "name": "suchtube",
-  "version": "0.5.4",
+  "version": "0.5.5",
   "description": "YouTube search as a service, with Slack integration and CLI",
   "bin": "bin/suchtube",
   "main": "src/search.js",
