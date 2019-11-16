@@ -1,6 +1,7 @@
 # SuchTube
 
-[![](https://img.shields.io/npm/v/suchtube.svg?style=flat-square)](https://www.npmjs.com/package/suchtube) [![](https://img.shields.io/travis/markets/suchtube.svg?style=flat-square)](https://travis-ci.org/markets/suchtube)
+[![](https://img.shields.io/npm/v/suchtube.svg?style=flat-square)](https://www.npmjs.com/package/suchtube)
+[![](https://img.shields.io/travis/markets/suchtube.svg?style=flat-square)](https://travis-ci.org/markets/suchtube)
 [![Help Contribute to Open Source](https://www.codetriage.com/markets/suchtube/badges/users.svg)](https://www.codetriage.com/markets/suchtube)
 
 > Youtube Search as a service
