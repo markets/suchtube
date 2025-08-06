@@ -31,7 +31,7 @@ You can also use the search part [as a library](#usage-as-a-library).
 
 - Node.js
 
-Currently this package officially supports (and is tested against) Node v16+. If you need to manage different Node environments, a version manager (like [creationix/nvm](https://github.com/creationix/nvm) or [tj/n](https://github.com/tj/n)) is recommended.
+Currently this package officially supports (and is tested against) Node v18+. If you need to manage different Node environments, a version manager (like [creationix/nvm](https://github.com/creationix/nvm) or [tj/n](https://github.com/tj/n)) is recommended.
 
 - YouTube Data API key
 
@@ -80,9 +80,9 @@ Displays full video's information. It corresponds to hit `GET /search.json?q=` a
 You can use the SuchTube search as a library:
 
 ```js
-const suchtube = require('suchtube')
+import { search } from 'suchtube'
 
-suchtube.search('funny cats', { random: true }).then(video => {
+search('funny cats', { random: true }).then(video => {
   console.log(video.title)
   console.log(video.link)
   console.log(video.publishedAt)
