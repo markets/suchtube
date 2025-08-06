@@ -1,14 +1,17 @@
-const express = require('express')
-const bodyParser = require('body-parser')
-const yargs = require('yargs')
-const { search } = require('./search')
-const { version } = require('../package.json')
+import express from 'express'
+import bodyParser from 'body-parser'
+import yargs from 'yargs'
+import { hideBin } from 'yargs/helpers'
+import { search } from './search.js'
+import pkg from '../package.json' with { type: 'json' }
+
+const { version } = pkg
 
 const app = express()
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
-exports.start = async () => {
+export const start = async () => {
   const port = process.env.PORT || 3333
 
   const server = app.listen(port, () => {
@@ -24,7 +27,7 @@ app.all('/search.:format?', async (req, res) => {
   const originalQuery = (format == "slack") && (req.method == 'POST')
     ? (req.body.text || '')
     : (req.query.q || '')
-  const args = yargs.parse(originalQuery)
+  const args = yargs(hideBin(originalQuery.split(' '))).parse(originalQuery)
   const query = args._.join(" ")
 
   console.log(`[LOG] format: ${format} | query: ${originalQuery}\n`)
