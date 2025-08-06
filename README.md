@@ -3,11 +3,11 @@
 [![](https://img.shields.io/npm/v/suchtube.svg?style=flat-square)](https://www.npmjs.com/package/suchtube)
 [![CI](https://img.shields.io/github/actions/workflow/status/markets/suchtube/ci.yml?branch=master&style=flat-square)](https://github.com/markets/suchtube/actions/workflows/ci.yml)
 
-> Youtube Search as a service
+> 🔍 📼 Youtube Search as a service
 
 SuchTube is a server and a CLI app to search videos on YouTube.
 
-The server responds to multiple formats, even comes with [Slack integration](#slack-integration):
+The server responds to multiple formats and even comes with [Slack integration](#slack-integration):
 
 - `html` at `GET /search.html?q=cats`
 - `json` at `GET /search.json?q=cats`
@@ -23,19 +23,14 @@ Or start the server:
 
     > suchtube --server
 
-You can also use the search part [as a library](#usage-as-a-library).
+You can also use the search functionality [as a library](#usage-as-a-library).
 
 ## Installation and usage
 
 ### Requirements
 
-- Node.js
-
-Currently this package officially supports (and is tested against) Node v18+. If you need to manage different Node environments, a version manager (like [creationix/nvm](https://github.com/creationix/nvm) or [tj/n](https://github.com/tj/n)) is recommended.
-
-- YouTube Data API key
-
-Should be loaded in current shell as an environment variable named `SUCHTUBE_YOUTUBE_DATA_API_V3`.
+- Node.js: Currently this package officially supports (and is tested against) Node v18+.
+- YouTube Data API key: Should be loaded in the current shell as an environment variable named `SUCHTUBE_YOUTUBE_DATA_API_V3`.
 
 ### Install
 
