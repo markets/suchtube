@@ -18,49 +18,49 @@ const responseChannel = [{
   linkEmbed: null
 }]
 
-// Create a mock youtube search function using sinon
-let mockYouTubeSearch
+// Create a mock youtubeAPI function using sinon
+let mockYouTubeAPI
 
 test.before(() => {
-  // Create a sinon stub for the youtube search function
-  mockYouTubeSearch = sinon.stub()
-  mockYouTubeSearch.withArgs('random video').resolves(responseVideo)
-  mockYouTubeSearch.withArgs('random playlist').resolves(responsePlaylist)
-  mockYouTubeSearch.withArgs('random channel').resolves(responseChannel)
-  mockYouTubeSearch.withArgs('non-existent-video').resolves([])
+  // Create a sinon stub for the youtubeAPI function
+  mockYouTubeAPI = sinon.stub()
+  mockYouTubeAPI.withArgs('random video', sinon.match.any).resolves(responseVideo)
+  mockYouTubeAPI.withArgs('random playlist', sinon.match.any).resolves(responsePlaylist)
+  mockYouTubeAPI.withArgs('random channel', sinon.match.any).resolves(responseChannel)
+  mockYouTubeAPI.withArgs('non-existent-video', sinon.match.any).resolves([])
 })
 
 test.after(() => {
   // Reset the stub after all tests
-  if (mockYouTubeSearch) {
-    mockYouTubeSearch.reset()
+  if (mockYouTubeAPI) {
+    mockYouTubeAPI.reset()
   }
 })
 
 test('search query', async t => {
-  let video = await search('random video', {}, mockYouTubeSearch)
+  let video = await search('random video', {}, mockYouTubeAPI)
   t.is(video.link, responseVideo[0].link)
 })
 
 test('search query with time - video', async t => {
-  let video = await search('random video', { time: 5 }, mockYouTubeSearch)
+  let video = await search('random video', { time: 5 }, mockYouTubeAPI)
   t.is(video.link, responseVideo[0].link + '&t=5')
   t.is(video.linkEmbed, responseVideo[0].linkEmbed + '?start=5')
 })
 
 test('search query with time - playlist', async t => {
-  let video = await search('random playlist', { time: 5 }, mockYouTubeSearch)
+  let video = await search('random playlist', { time: 5 }, mockYouTubeAPI)
   t.is(video.link, responsePlaylist[0].link + '&t=5')
   t.is(video.linkEmbed, responsePlaylist[0].linkEmbed + '&start=5')
 })
 
 test('search query with time - channel', async t => {
-  let video = await search('random channel', { time: 5 }, mockYouTubeSearch)
+  let video = await search('random channel', { time: 5 }, mockYouTubeAPI)
   t.is(video.link, responseChannel[0].link)
   t.is(video.linkEmbed, null)
 })
 
 test('search non-existent video', async t => {
-  let video = await search('non-existent-video', {}, mockYouTubeSearch)
+  let video = await search('non-existent-video', {}, mockYouTubeAPI)
   t.falsy(video)
 })

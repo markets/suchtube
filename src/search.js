@@ -2,7 +2,7 @@ import axios from 'axios'
 
 const URL = 'https://www.googleapis.com/youtube/v3/search'
 
-const youtubeSearch = async (query, options) => {
+const youtubeAPI = async (query, options) => {
   const params = {
     q: query,
     key: process.env.SUCHTUBE_YOUTUBE_DATA_API_V3,
@@ -54,8 +54,8 @@ const youtubeSearch = async (query, options) => {
   })
 }
 
-export const search = async (query, options = {}, youtubeSearchFn = youtubeSearch) => {
-  const videos = await youtubeSearchFn(query, options)
+export const search = async (query, options = {}, youtubeAPIFn = youtubeAPI) => {
+  const videos = await youtubeAPIFn(query, options)
 
   if (videos.length == 0) return
 
