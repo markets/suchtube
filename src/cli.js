@@ -1,4 +1,4 @@
-const opn = require('opn')
+const open = require('open')
 const yargs = require('yargs')
 const { search } = require('./search')
 const server = require('./server')
@@ -57,7 +57,7 @@ exports.start = async () => {
     }
 
     if (args.open) {
-      opn(video.link)
+      open(video.link)
       process.exit()
     } else {
       if (args.full) {

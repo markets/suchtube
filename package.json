@@ -24,16 +24,19 @@
   "author": "Marc Anguera Insa @markets",
   "repository": "markets/suchtube",
   "license": "MIT",
+  "engines": {
+    "node": ">=16.0.0"
+  },
   "dependencies": {
-    "axios": "^0.19.0",
-    "body-parser": "^1.19.0",
-    "express": "^4.17.1",
-    "opn": "^5.4.0",
-    "yargs": "^15.0.0"
+    "axios": "^1.11.0",
+    "body-parser": "^1.20.3",
+    "express": "^4.21.2",
+    "open": "^10.2.0",
+    "yargs": "^17.7.2"
   },
   "devDependencies": {
-    "ava": "^1.0.0",
-    "nodemon": "^1.19.4",
-    "sinon": "^7.5.0"
+    "ava": "^2.4.0",
+    "nodemon": "^3.1.10",
+    "sinon": "^19.0.5"
   }
 }
