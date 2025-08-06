@@ -1,7 +1,7 @@
 # SuchTube
 
 [![](https://img.shields.io/npm/v/suchtube.svg?style=flat-square)](https://www.npmjs.com/package/suchtube)
-[![](https://img.shields.io/travis/markets/suchtube.svg?style=flat-square)](https://travis-ci.org/markets/suchtube)
+[![CI](https://img.shields.io/github/actions/workflow/status/markets/suchtube/ci.yml?branch=master&style=flat-square)](https://github.com/markets/suchtube/actions/workflows/ci.yml)
 [![Help Contribute to Open Source](https://www.codetriage.com/markets/suchtube/badges/users.svg)](https://www.codetriage.com/markets/suchtube)
 
 > Youtube Search as a service
@@ -32,7 +32,7 @@ You can also use the search part [as a library](#usage-as-a-library).
 
 - Node.js
 
-Currently this package officially supports (and is tested against) Node v8.3+. If you need to manage different Node environments, a version manager (like [creationix/nvm](https://github.com/creationix/nvm) or [tj/n](https://github.com/tj/n)) is recommended.
+Currently this package officially supports (and is tested against) Node v16+. If you need to manage different Node environments, a version manager (like [creationix/nvm](https://github.com/creationix/nvm) or [tj/n](https://github.com/tj/n)) is recommended.
 
 - YouTube Data API key
 
