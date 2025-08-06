@@ -1,6 +1,6 @@
-const YouTubeSearch = require('./youtube-search')
+import * as YouTubeSearch from './youtube-search.js'
 
-exports.search = async (query, options = {}) => {
+export const search = async (query, options = {}) => {
   const videos = await YouTubeSearch.run(query, options)
 
   if (videos.length == 0) return

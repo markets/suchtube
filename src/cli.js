@@ -1,9 +1,10 @@
-const open = require('open')
-const yargs = require('yargs')
-const { search } = require('./search')
-const server = require('./server')
+import open from 'open'
+import yargs from 'yargs'
+import { hideBin } from 'yargs/helpers'
+import { search } from './search.js'
+import * as server from './server.js'
 
-const args = yargs
+const args = yargs(hideBin(process.argv))
   .locale('en')
   .usage('Usage: suchtube query [options]')
   .example('suchtube funny cats')
@@ -38,7 +39,7 @@ const args = yargs
   })
   .argv
 
-exports.start = async () => {
+export const start = async () => {
   if (args.server) {
     if (args.port) {
       process.env.PORT = args.port

@@ -2,6 +2,7 @@
   "name": "suchtube",
   "version": "0.5.6",
   "description": "YouTube search as a service, with Slack integration and CLI",
+  "type": "module",
   "bin": "bin/suchtube",
   "main": "src/search.js",
   "scripts": {

@@ -1,11 +1,8 @@
 import test from 'ava'
 import sinon from 'sinon'
+import { search } from '../src/search.js'
+import * as YouTubeSearch from '../src/youtube-search.js'
 
-const { search } = require('../src/search')
-const YouTubeSearch = require('../src/youtube-search')
-
-// Stub API calls
-const stub = sinon.stub(YouTubeSearch, 'run')
 const responseVideo = [{
   kind: 'video',
   link: 'https://www.youtube.com/watch?v=WEkSYw3o5is',
@@ -21,10 +18,23 @@ const responseChannel = [{
   link: 'https://www.youtube.com/channel/UC9YydG57epLqxA9cTzZXSeQ',
   linkEmbed: null
 }]
-stub.withArgs('random video').returns(responseVideo)
-stub.withArgs('random playlist').returns(responsePlaylist)
-stub.withArgs('random channel').returns(responseChannel)
-stub.withArgs('non-existent-video').returns([])
+
+// Create stubs that will be set up once
+let stub
+
+test.before(() => {
+  // Stub API calls once before all tests
+  stub = sinon.stub(YouTubeSearch, 'run')
+  stub.withArgs('random video').resolves(responseVideo)
+  stub.withArgs('random playlist').resolves(responsePlaylist)
+  stub.withArgs('random channel').resolves(responseChannel)
+  stub.withArgs('non-existent-video').resolves([])
+})
+
+test.after(() => {
+  // Restore after all tests
+  stub.restore()
+})
 
 test('search query', async t => {
   let video = await search('random video')

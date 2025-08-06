@@ -1,7 +1,7 @@
-const axios = require('axios')
+import axios from 'axios'
 const URL = 'https://www.googleapis.com/youtube/v3/search'
 
-exports.run = async (query, options) => {
+export const run = async (query, options) => {
   const params = {
     q: query,
     key: process.env.SUCHTUBE_YOUTUBE_DATA_API_V3,
