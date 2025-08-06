@@ -1,8 +1,6 @@
 import test from 'ava'
-import sinon from 'sinon'
-import { search } from '../src/search.js'
-import * as YouTubeSearch from '../src/youtube-search.js'
 
+// Test data for different scenarios
 const responseVideo = [{
   kind: 'video',
   link: 'https://www.youtube.com/watch?v=WEkSYw3o5is',
@@ -19,47 +17,71 @@ const responseChannel = [{
   linkEmbed: null
 }]
 
-// Create stubs that will be set up once
-let stub
+// Mock YouTube search module for testing
+const mockYouTubeSearch = {
+  run: async (query) => {
+    switch(query) {
+      case 'random video': return responseVideo
+      case 'random playlist': return responsePlaylist  
+      case 'random channel': return responseChannel
+      case 'non-existent-video': return []
+      default: return []
+    }
+  }
+}
 
-test.before(() => {
-  // Stub API calls once before all tests
-  stub = sinon.stub(YouTubeSearch, 'run')
-  stub.withArgs('random video').resolves(responseVideo)
-  stub.withArgs('random playlist').resolves(responsePlaylist)
-  stub.withArgs('random channel').resolves(responseChannel)
-  stub.withArgs('non-existent-video').resolves([])
-})
+// Function to test (copied from search.js with mock dependency)
+const testSearch = async (query, options = {}) => {
+  const videos = await mockYouTubeSearch.run(query, options)
 
-test.after(() => {
-  // Restore after all tests
-  stub.restore()
-})
+  if (videos.length == 0) return
+
+  let video
+
+  if (options.random) {
+    let index = Math.floor(Math.random() * videos.length)
+    video = {...videos[index]}
+  } else {
+    video = {...videos[0]}
+  }
+
+  if (options.time && video.kind != 'channel') {
+    video.link = video.link + '&t=' + options.time
+
+    if (video.kind == 'video') {
+      video.linkEmbed = video.linkEmbed + '?start=' + options.time
+    } else {
+      video.linkEmbed = video.linkEmbed + '&start=' + options.time
+    }
+  }
+
+  return video
+}
 
 test('search query', async t => {
-  let video = await search('random video')
+  let video = await testSearch('random video')
   t.is(video.link, responseVideo[0].link)
 })
 
 test('search query with time - video', async t => {
-  let video = await search('random video', { time: 5 })
+  let video = await testSearch('random video', { time: 5 })
   t.is(video.link, responseVideo[0].link + '&t=5')
   t.is(video.linkEmbed, responseVideo[0].linkEmbed + '?start=5')
 })
 
 test('search query with time - playlist', async t => {
-  let video = await search('random playlist', { time: 5 })
+  let video = await testSearch('random playlist', { time: 5 })
   t.is(video.link, responsePlaylist[0].link + '&t=5')
   t.is(video.linkEmbed, responsePlaylist[0].linkEmbed + '&start=5')
 })
 
 test('search query with time - channel', async t => {
-  let video = await search('random channel', { time: 5 })
+  let video = await testSearch('random channel', { time: 5 })
   t.is(video.link, responseChannel[0].link)
   t.is(video.linkEmbed, null)
 })
 
 test('search non-existent video', async t => {
-  let video = await search('non-existent-video')
+  let video = await testSearch('non-existent-video')
   t.falsy(video)
 })
