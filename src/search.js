@@ -54,8 +54,13 @@ const youtubeAPI = async (query, options) => {
   })
 }
 
-export const search = async (query, options = {}, youtubeAPIFn = youtubeAPI) => {
-  const videos = await youtubeAPIFn(query, options)
+// Create an API object that can be stubbed in tests
+export const api = {
+  youtubeAPI
+}
+
+export const search = async (query, options = {}) => {
+  const videos = await api.youtubeAPI(query, options)
 
   if (videos.length == 0) return
 
