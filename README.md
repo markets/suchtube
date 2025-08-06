@@ -2,7 +2,6 @@
 
 [![](https://img.shields.io/npm/v/suchtube.svg?style=flat-square)](https://www.npmjs.com/package/suchtube)
 [![CI](https://img.shields.io/github/actions/workflow/status/markets/suchtube/ci.yml?branch=master&style=flat-square)](https://github.com/markets/suchtube/actions/workflows/ci.yml)
-[![Help Contribute to Open Source](https://www.codetriage.com/markets/suchtube/badges/users.svg)](https://www.codetriage.com/markets/suchtube)
 
 > Youtube Search as a service
 
