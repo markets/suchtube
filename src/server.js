@@ -22,6 +22,10 @@ export const start = async () => {
   })
 }
 
+app.get('/', async (req, res) => {
+  res.redirect('/search')
+})
+
 app.all('/search.:format?', async (req, res) => {
   const format = req.params.format || 'html'
   const originalQuery = (format == "slack") && (req.method == 'POST')
@@ -39,7 +43,7 @@ app.all('/search.:format?', async (req, res) => {
   if (video) {
     videoLink = video.link
     videoTitle = video.title
-  } else {
+  } else {
     videoLink = 'Not found 乁(ツ)ㄏ'
     videoTitle = videoLink
   }
@@ -57,8 +61,10 @@ app.all('/search.:format?', async (req, res) => {
     let html =
       `<html><body style="background-color: #ccc; padding: 2em; font-family: sans-serif;">
       <h1>SuchTube v${version}</h1>
-      <form action="/search"><input type="text" name="q" value="${originalQuery}" size="40"></form>
-      <h2>${videoTitle}</h2>`
+      <form action="/search"><input name="q" value="${originalQuery}" style="width: 400px; height: 40px;"></form>`
+
+    if (query != "")
+      html += `<h2>${videoTitle}</h2>`
 
     if (video) {
       html +=
