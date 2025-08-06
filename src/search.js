@@ -1,7 +1,7 @@
-import * as YouTubeSearch from './youtube-search.js'
+import { run as defaultRun } from './youtube-search.js'
 
-export const search = async (query, options = {}) => {
-  const videos = await YouTubeSearch.run(query, options)
+export const search = async (query, options = {}, youtubeSearchFn = defaultRun) => {
+  const videos = await youtubeSearchFn(query, options)
 
   if (videos.length == 0) return
 
@@ -17,7 +17,7 @@ export const search = async (query, options = {}) => {
   if (options.time && video.kind != 'channel') {
     video.link = video.link + '&t=' + options.time
 
-    if (video.kind == 'video') {
+    if (video.kind == 'video') {
       video.linkEmbed = video.linkEmbed + '?start=' + options.time
     } else {
       video.linkEmbed = video.linkEmbed + '&start=' + options.time
