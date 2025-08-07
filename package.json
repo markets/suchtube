@@ -14,11 +14,12 @@
     "release:major": "npm version major && git push && git push --tags && npm publish"
   },
   "keywords": [
+    "youtube",
+    "videos",
     "slack",
     "slack-command",
     "discord",
     "discord-slash-command",
-    "youtube",
     "search",
     "api",
     "service",
