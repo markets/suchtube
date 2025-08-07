@@ -3,7 +3,9 @@
   "version": "0.6.0",
   "description": "YouTube search as a service, with Slack integration and CLI",
   "type": "module",
-  "bin": "bin/suchtube",
+  "bin": {
+    "suchtube": "bin/suchtube"
+  },
   "main": "src/search.js",
   "scripts": {
     "start": "./bin/suchtube --server",
@@ -26,7 +28,10 @@
     "cli"
   ],
   "author": "Marc Anguera Insa @markets",
-  "repository": "markets/suchtube",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/markets/suchtube.git"
+  },
   "license": "MIT",
   "engines": {
     "node": ">=18.0.0"
