@@ -7,12 +7,13 @@
 
 SuchTube is a server and a CLI app to search videos on YouTube.
 
-The server responds to multiple formats and even comes with [Slack integration](#slack-integration):
+The server responds to multiple formats and even comes with [Slack integration](#slack-integration) and [Discord integration](#discord-integration):
 
 - `html` at `GET /search.html?q=cats`
 - `json` at `GET /search.json?q=cats`
 - `text` at `GET /search.text?q=cats`
 - `slack` at `POST /search.slack` + Slack payload
+- `discord` at `POST /search.discord` + Discord interaction payload
 
 The CLI allows you to search videos without leaving the terminal:
 
@@ -91,6 +92,21 @@ search('funny cats', { random: true }).then(video => {
 To integrate SuchTube in your Slack workspace, read the following guides: https://api.slack.com/slash-commands.
 
 Basically, you should run the server, make it publicly available (via URL or IP) and create a custom Slash Command pointing to your instance URL.
+
+## Discord integration
+
+`/suchtube query:funny cats --random`
+
+To integrate SuchTube in your Discord server, read the following guides: https://discord.com/developers/docs/interactions/application-commands.
+
+You need to:
+1. Create a Discord application at https://discord.com/developers/applications
+2. Set up a slash command with the name `suchtube`
+3. Add a string option named `query` for the search terms
+4. Set the interaction endpoint URL to your server instance at `/search.discord`
+5. Install the application to your Discord server
+
+The Discord integration responds with the video link in the channel where the command was used.
 
 ## Contributing
 
