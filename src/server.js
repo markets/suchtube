@@ -28,9 +28,19 @@ app.get('/', async (req, res) => {
 
 app.all('/search.:format?', async (req, res) => {
   const format = req.params.format || 'html'
-  const originalQuery = (format == "slack") && (req.method == 'POST')
-    ? (req.body.text || '')
-    : (req.query.q || '')
+  let originalQuery = ''
+  
+  if ((format == "slack") && (req.method == 'POST')) {
+    originalQuery = req.body.text || ''
+  } else if ((format == "discord") && (req.method == 'POST')) {
+    // Discord sends interaction data with options array
+    const options = req.body.data?.options || []
+    const queryOption = options.find(opt => opt.name === 'query')
+    originalQuery = queryOption?.value || ''
+  } else {
+    originalQuery = req.query.q || ''
+  }
+  
   const args = yargs(hideBin(originalQuery.split(' '))).parse(originalQuery)
   const query = args._.join(" ")
 
@@ -52,6 +62,13 @@ app.all('/search.:format?', async (req, res) => {
     res.send({
       response_type: 'in_channel',
       text: videoLink
+    })
+  } else if (format == 'discord') {
+    res.send({
+      type: 4, // CHANNEL_MESSAGE_WITH_SOURCE
+      data: {
+        content: videoLink
+      }
     })
   } else if (format == 'text') {
     res.send(videoLink)
