@@ -6,7 +6,7 @@ const youtubeAPI = async (query, options) => {
   const params = {
     q: query,
     key: process.env.SUCHTUBE_YOUTUBE_DATA_API_V3,
-    maxResults: options.random ? 20 : 1,
+    maxResults: options.random ? 50 : 1,
     part: 'snippet'
   }
 
