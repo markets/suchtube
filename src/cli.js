@@ -35,6 +35,7 @@ const yargsInstance = yargs(hideBin(process.argv))
   })
   .option('port', {
     description: 'Port for SuchTube server',
+    alias: 'p',
     number: true
   })
 
