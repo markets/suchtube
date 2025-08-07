@@ -4,7 +4,7 @@ import { hideBin } from 'yargs/helpers'
 import { search } from './search.js'
 import * as server from './server.js'
 
-const args = yargs(hideBin(process.argv))
+const yargsInstance = yargs(hideBin(process.argv))
   .locale('en')
   .usage('Usage: suchtube query [options]')
   .example('suchtube funny cats')
@@ -37,7 +37,8 @@ const args = yargs(hideBin(process.argv))
     description: 'Port for SuchTube server',
     number: true
   })
-  .argv
+
+const args = yargsInstance.argv
 
 export const start = async () => {
   if (args.server) {
@@ -48,7 +49,7 @@ export const start = async () => {
   } else {
     const query = args._.join()
     if (!query) {
-      return yargs.showHelp()
+      return yargsInstance.showHelp()
     }
 
     const video = await search(query, args)
