@@ -1,6 +1,6 @@
 {
   "name": "suchtube",
-  "version": "0.7.0",
+  "version": "0.8.0",
   "description": "YouTube search as a service, with Slack and Discord integration and CLI",
   "type": "module",
   "bin": {
