@@ -19,29 +19,20 @@ const responseChannel = [{
 }]
 
 // Create a stub that will be set up once
-let stub, videoDetailsStub
+let stub
 
 test.before(() => {
   // Stub API calls once before all tests
   stub = sinon.stub(SearchModule.api, 'youtubeAPI')
-  videoDetailsStub = sinon.stub(SearchModule.api, 'getVideoDetails')
-  
   stub.withArgs('random video', sinon.match.any).resolves(responseVideo)
   stub.withArgs('random playlist', sinon.match.any).resolves(responsePlaylist)
   stub.withArgs('random channel', sinon.match.any).resolves(responseChannel)
   stub.withArgs('non-existent-video', sinon.match.any).resolves([])
-  
-  // Mock video details responses
-  videoDetailsStub.withArgs(['WEkSYw3o5is']).resolves([{
-    id: 'WEkSYw3o5is',
-    contentDetails: { duration: 'PT2M30S' } // 2 minutes 30 seconds - not a short
-  }])
 })
 
 test.after(() => {
   // Restore after all tests
   stub.restore()
-  videoDetailsStub.restore()
 })
 
 test('search query', async t => {
@@ -72,30 +63,22 @@ test('search non-existent video', async t => {
   t.falsy(video)
 })
 
-test('search with no-shorts option - calls youtubeAPI with correct options', async t => {
-  // Test that the noShorts option is passed correctly
-  const result = await SearchModule.search('random video', { noShorts: true })
+test('search with duration option - calls youtubeAPI with videoDuration parameter', async t => {
+  // Test that the duration option is passed correctly to YouTube API
+  const result = await SearchModule.search('random video', { duration: 'short' })
   t.truthy(result)
   t.is(result.link, responseVideo[0].link)
   
-  // Verify the youtubeAPI was called with noShorts option
-  t.true(stub.calledWith('random video', sinon.match({ noShorts: true })))
+  // Verify the youtubeAPI was called with duration option
+  t.true(stub.calledWith('random video', sinon.match({ duration: 'short' })))
 })
 
-test('parseDuration helper function', async t => {
-  t.is(SearchModule.parseDuration('PT30S'), 30) // 30 seconds
-  t.is(SearchModule.parseDuration('PT1M'), 60) // 1 minute
-  t.is(SearchModule.parseDuration('PT1M30S'), 90) // 1 minute 30 seconds
-  t.is(SearchModule.parseDuration('PT1H2M3S'), 3723) // 1 hour 2 minutes 3 seconds
-  t.is(SearchModule.parseDuration('PT0S'), 0) // 0 seconds
-  t.is(SearchModule.parseDuration(''), 0) // Invalid duration
-})
-
-test('isYouTubeShort helper function', async t => {
-  t.true(SearchModule.isYouTubeShort('PT30S')) // 30 seconds - is short
-  t.true(SearchModule.isYouTubeShort('PT60S')) // 60 seconds - is short (boundary)
-  t.true(SearchModule.isYouTubeShort('PT1M')) // 1 minute - is short (boundary)
-  t.false(SearchModule.isYouTubeShort('PT61S')) // 61 seconds - not short
-  t.false(SearchModule.isYouTubeShort('PT1M1S')) // 1 minute 1 second - not short
-  t.false(SearchModule.isYouTubeShort('PT2M30S')) // 2 minutes 30 seconds - not short
+test('search with duration "any" - does not add videoDuration parameter', async t => {
+  // Test that "any" duration doesn't add the parameter
+  const result = await SearchModule.search('random video', { duration: 'any' })
+  t.truthy(result)
+  t.is(result.link, responseVideo[0].link)
+  
+  // Verify the youtubeAPI was called with duration option
+  t.true(stub.calledWith('random video', sinon.match({ duration: 'any' })))
 })

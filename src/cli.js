@@ -38,9 +38,10 @@ const yargsInstance = yargs(hideBin(process.argv))
     alias: 'p',
     number: true
   })
-  .option('no-shorts', {
-    description: 'Filter out YouTube Shorts (videos ≤60 seconds)',
-    alias: 'n'
+  .option('duration', {
+    description: 'Filter videos by duration (any, short, medium, long)',
+    alias: 'd',
+    choices: ['any', 'short', 'medium', 'long']
   })
 
 const args = yargsInstance.argv

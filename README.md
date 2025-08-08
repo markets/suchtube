@@ -19,7 +19,8 @@ The CLI allows you to search videos without leaving the terminal:
 
     > suchtube funny cats
     > suchtube football top goals --random --open
-    > suchtube viral videos --no-shorts
+    > suchtube trending videos --duration=short
+    > suchtube documentary --duration=long --random
 
 Or start the server:
 
@@ -72,9 +73,9 @@ Opens the video in your browser.
 
 Displays full video's information. It corresponds to hit `GET /search.json?q=` against the server.
 
-- `--no-shorts`, `-n`
+- `--duration=short`, `-d=short`
 
-Filters out YouTube Shorts (videos that are 60 seconds or less in duration). When enabled, only longer-form videos will be returned in search results.
+Filters videos by duration. Available values: `any` (default), `short`, `medium`, `long`. Uses YouTube's videoDuration parameter to filter results directly from the API.
 
 ## Usage as a library
 
@@ -88,11 +89,17 @@ search('funny cats', { random: true }).then(video => {
   console.log(video.link)
   console.log(video.publishedAt)
 })
+
+// Filter by duration
+search('trending videos', { duration: 'short' }).then(video => {
+  console.log(video.title)  // Will be a short video
+})
 ```
 
 ## Slack integration
 
 `/suchtube funny cats --random`
+`/suchtube trending videos --duration=short`
 
 To integrate SuchTube in your Slack workspace, read the following guides: https://api.slack.com/slash-commands.
 
@@ -101,6 +108,7 @@ Basically, you should run the server, make it publicly available (via URL or IP)
 ## Discord integration
 
 `/suchtube query:funny cats --random`
+`/suchtube query:trending videos --duration=short`
 
 To integrate SuchTube in your Discord server, read the following guides: https://discord.com/developers/docs/interactions/application-commands.
 

@@ -1,52 +1,16 @@
 const YOUTUBE_API_URL = 'https://www.googleapis.com/youtube/v3/search'
-const YOUTUBE_VIDEOS_API_URL = 'https://www.googleapis.com/youtube/v3/videos'
-
-// Helper function to parse ISO 8601 duration (PT1M30S) to seconds
-export const parseDuration = (duration) => {
-  const match = duration.match(/PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?/)
-  if (!match) return 0
-  
-  const hours = parseInt(match[1]) || 0
-  const minutes = parseInt(match[2]) || 0
-  const seconds = parseInt(match[3]) || 0
-  
-  return hours * 3600 + minutes * 60 + seconds
-}
-
-// Helper function to check if a video is a YouTube Short (≤60 seconds)
-export const isYouTubeShort = (duration) => {
-  return parseDuration(duration) <= 60
-}
-
-// Function to get video details including duration
-const getVideoDetails = async (videoIds) => {
-  if (!videoIds.length) return []
-  
-  const params = {
-    id: videoIds.join(','),
-    key: process.env.SUCHTUBE_YOUTUBE_DATA_API_V3,
-    part: 'contentDetails'
-  }
-
-  const url = new URL(YOUTUBE_VIDEOS_API_URL)
-  Object.keys(params).forEach(key => url.searchParams.append(key, params[key]))
-
-  const response = await fetch(url)
-  const data = await response.json()
-
-  return data.items || []
-}
 
 const youtubeAPI = async (query, options) => {
-  // Increase max results when filtering shorts to account for filtered items
-  const baseMaxResults = options.random ? 50 : 1
-  const maxResults = options.noShorts ? Math.min(baseMaxResults * 2, 50) : baseMaxResults
-  
   const params = {
     q: query,
     key: process.env.SUCHTUBE_YOUTUBE_DATA_API_V3,
-    maxResults: maxResults,
+    maxResults: options.random ? 50 : 1,
     part: 'snippet'
+  }
+
+  // Add videoDuration filter if specified
+  if (options.duration && options.duration !== 'any') {
+    params.videoDuration = options.duration
   }
 
   if (!params.key || params.key == "") {
@@ -60,7 +24,7 @@ const youtubeAPI = async (query, options) => {
   const response = await fetch(url)
   const data = await response.json()
 
-  let items = data.items.map(item => {
+  return data.items.map(item => {
     let id, link, linkEmbed, kind
 
     switch (item.id.kind) {
@@ -96,40 +60,11 @@ const youtubeAPI = async (query, options) => {
       channelTitle: item.snippet.channelTitle
     }
   })
-
-  // Filter out YouTube Shorts if the option is enabled
-  if (options.noShorts) {
-    // Get video IDs for duration checking (only for videos, not channels/playlists)
-    const videoIds = items.filter(item => item.kind === 'video').map(item => item.id)
-    
-    if (videoIds.length > 0) {
-      // Get video details including duration
-      const videoDetails = await getVideoDetails(videoIds)
-      
-      // Create a map of video ID to duration
-      const durationMap = {}
-      videoDetails.forEach(video => {
-        durationMap[video.id] = video.contentDetails.duration
-      })
-      
-      // Filter out shorts (videos ≤60 seconds) but keep channels and playlists
-      items = items.filter(item => {
-        if (item.kind !== 'video') return true // Keep channels and playlists
-        const duration = durationMap[item.id]
-        return duration && !isYouTubeShort(duration)
-      })
-    }
-  }
-
-  // Return the original requested amount if possible
-  const finalMaxResults = options.random ? 50 : 1
-  return items.slice(0, finalMaxResults)
 }
 
 // Create an API object that can be stubbed in tests
 export const api = {
-  youtubeAPI,
-  getVideoDetails
+  youtubeAPI
 }
 
 export const search = async (query, options = {}) => {
