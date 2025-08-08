@@ -1,5 +1,3 @@
-import axios from 'axios'
-
 const YOUTUBE_API_URL = 'https://www.googleapis.com/youtube/v3/search'
 
 const youtubeAPI = async (query, options) => {
@@ -14,9 +12,14 @@ const youtubeAPI = async (query, options) => {
     console.error('Whoops! You should setup your YouTube Data API key')
   }
 
-  const response = await axios.get(YOUTUBE_API_URL, { params })
+  // Build URL with query parameters
+  const url = new URL(YOUTUBE_API_URL)
+  Object.keys(params).forEach(key => url.searchParams.append(key, params[key]))
 
-  return response.data.items.map(item => {
+  const response = await fetch(url)
+  const data = await response.json()
+
+  return data.items.map(item => {
     let id, link, linkEmbed, kind
 
     switch (item.id.kind) {
