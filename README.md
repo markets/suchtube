@@ -57,23 +57,23 @@ The server listens by default on port 3333, if you want to change this, you can 
 
 Options while using the CLI are available in the following formats: `--time=10` or `--time 10`. For the server, you should pass the options along with the query, inside the `q` paramater, ie: `?q=funny+cats+--time=10`.
 
-- `--time=10`, `-t=10`
+#### `--time=10`, `-t=10`
 
 Starts the video at the given time in seconds.
 
-- `--random`, `-r`
+#### `--random`, `-r`
 
 Returns a random video taking into account the given topic.
 
-- `--open`, `-o` *(CLI only)*
+#### `--open`, `-o` *(CLI only)*
 
 Opens the video in your browser.
 
-- `--full`, `-f` *(CLI only)*
+#### `--full`, `-f` *(CLI only)*
 
 Displays full video's information. It corresponds to hit `GET /search.json?q=` against the server.
 
-- `--duration=short`, `-d=short`
+#### `--duration=short`, `-d=short`
 
 Filters videos by duration. Available values: `any` (default), `short`, `medium`, `long`. Uses YouTube's videoDuration parameter to filter results directly from the API.
 
