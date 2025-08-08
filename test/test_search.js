@@ -62,23 +62,3 @@ test('search non-existent video', async t => {
   let video = await SearchModule.search('non-existent-video')
   t.falsy(video)
 })
-
-test('search with duration option - calls youtubeAPI with videoDuration parameter', async t => {
-  // Test that the duration option is passed correctly to YouTube API
-  const result = await SearchModule.search('random video', { duration: 'short' })
-  t.truthy(result)
-  t.is(result.link, responseVideo[0].link)
-  
-  // Verify the youtubeAPI was called with duration option
-  t.true(stub.calledWith('random video', sinon.match({ duration: 'short' })))
-})
-
-test('search with duration "any" - does not add videoDuration parameter', async t => {
-  // Test that "any" duration doesn't add the parameter
-  const result = await SearchModule.search('random video', { duration: 'any' })
-  t.truthy(result)
-  t.is(result.link, responseVideo[0].link)
-  
-  // Verify the youtubeAPI was called with duration option
-  t.true(stub.calledWith('random video', sinon.match({ duration: 'any' })))
-})

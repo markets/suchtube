@@ -84,22 +84,16 @@ You can use the SuchTube search as a library:
 ```js
 import { search } from 'suchtube'
 
-search('funny cats', { random: true }).then(video => {
+search('funny cats', { random: true, duration: 'short' }).then(video => {
   console.log(video.title)
   console.log(video.link)
   console.log(video.publishedAt)
-})
-
-// Filter by duration
-search('trending videos', { duration: 'short' }).then(video => {
-  console.log(video.title)  // Will be a short video
 })
 ```
 
 ## Slack integration
 
 `/suchtube funny cats --random`
-`/suchtube trending videos --duration=short`
 
 To integrate SuchTube in your Slack workspace, read the following guides: https://api.slack.com/slash-commands.
 
@@ -108,7 +102,6 @@ Basically, you should run the server, make it publicly available (via URL or IP)
 ## Discord integration
 
 `/suchtube query:funny cats --random`
-`/suchtube query:trending videos --duration=short`
 
 To integrate SuchTube in your Discord server, read the following guides: https://discord.com/developers/docs/interactions/application-commands.
 

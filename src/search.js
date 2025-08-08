@@ -8,9 +8,9 @@ const youtubeAPI = async (query, options) => {
     part: 'snippet'
   }
 
-  // Add videoDuration filter if specified
   if (options.duration && options.duration !== 'any') {
     params.videoDuration = options.duration
+    params.type = 'video'
   }
 
   if (!params.key || params.key == "") {
