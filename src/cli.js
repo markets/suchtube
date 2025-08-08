@@ -10,6 +10,7 @@ const yargsInstance = yargs(hideBin(process.argv))
   .example('suchtube funny cats')
   .example('suchtube football top goals --open')
   .example('suchtube top summer songs --random')
+  .example('suchtube trending videos --duration=short')
   .example('suchtube --server')
   .alias('version', 'v')
   .alias('help', 'h')
@@ -24,6 +25,11 @@ const yargsInstance = yargs(hideBin(process.argv))
   .option('open', {
     description: 'Open the video in your browser',
     alias: 'o'
+  })
+  .option('duration', {
+    description: 'Filter videos by duration',
+    alias: 'd',
+    choices: ['any', 'short', 'medium', 'long']
   })
   .option('full', {
     description: 'Display full information',
