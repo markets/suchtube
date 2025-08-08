@@ -26,6 +26,11 @@ const yargsInstance = yargs(hideBin(process.argv))
     description: 'Open the video in your browser',
     alias: 'o'
   })
+  .option('duration', {
+    description: 'Filter videos by duration',
+    alias: 'd',
+    choices: ['any', 'short', 'medium', 'long']
+  })
   .option('full', {
     description: 'Display full information',
     alias: 'f'
@@ -38,11 +43,6 @@ const yargsInstance = yargs(hideBin(process.argv))
     description: 'Port for SuchTube server',
     alias: 'p',
     number: true
-  })
-  .option('duration', {
-    description: 'Filter videos by duration',
-    alias: 'd',
-    choices: ['any', 'short', 'medium', 'long']
   })
 
 const args = yargsInstance.argv

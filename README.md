@@ -65,6 +65,10 @@ Starts the video at the given time in seconds.
 
 Returns a random video taking into account the given topic.
 
+#### `--duration=short`, `-d=short`
+
+Filters videos by duration. Available values: `any` (default), `short`, `medium`, `long`. Uses YouTube's videoDuration parameter to filter results directly from the API.
+
 #### `--open`, `-o` *(CLI only)*
 
 Opens the video in your browser.
@@ -72,10 +76,6 @@ Opens the video in your browser.
 #### `--full`, `-f` *(CLI only)*
 
 Displays full video's information. It corresponds to hit `GET /search.json?q=` against the server.
-
-#### `--duration=short`, `-d=short`
-
-Filters videos by duration. Available values: `any` (default), `short`, `medium`, `long`. Uses YouTube's videoDuration parameter to filter results directly from the API.
 
 ## Usage as a library
 
