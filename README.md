@@ -19,6 +19,7 @@ The CLI allows you to search videos without leaving the terminal:
 
     > suchtube funny cats
     > suchtube football top goals --random --open
+    > suchtube viral videos --no-shorts
 
 Or start the server:
 
@@ -70,6 +71,10 @@ Opens the video in your browser.
 - `--full`, `-f` *(CLI only)*
 
 Displays full video's information. It corresponds to hit `GET /search.json?q=` against the server.
+
+- `--no-shorts`, `-n`
+
+Filters out YouTube Shorts (videos that are 60 seconds or less in duration). When enabled, only longer-form videos will be returned in search results.
 
 ## Usage as a library
 
