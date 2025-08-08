@@ -8,13 +8,13 @@ const youtubeAPI = async (query, options) => {
     part: 'snippet'
   }
 
+  if (!params.key || params.key == "") {
+    throw new Error('Whoops! You must set your YouTube Data API key')
+  }
+
   if (options.duration && options.duration !== 'any') {
     params.videoDuration = options.duration
     params.type = 'video'
-  }
-
-  if (!params.key || params.key == "") {
-    console.error('Whoops! You should setup your YouTube Data API key')
   }
 
   // Build URL with query parameters
