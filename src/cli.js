@@ -11,6 +11,7 @@ const yargsInstance = yargs(hideBin(process.argv))
   .example('suchtube football top goals --open')
   .example('suchtube top summer songs --random')
   .example('suchtube trending videos --duration=short')
+  .example('suchtube javascript tutorials --all')
   .example('suchtube --server')
   .alias('version', 'v')
   .alias('help', 'h')
@@ -34,6 +35,10 @@ const yargsInstance = yargs(hideBin(process.argv))
   .option('full', {
     description: 'Display full information',
     alias: 'f'
+  })
+  .option('all', {
+    description: 'Return all videos from the search',
+    alias: 'a'
   })
   .option('server', {
     description: 'Start SuchTube server',
@@ -59,20 +64,37 @@ export const start = async () => {
       return yargsInstance.showHelp()
     }
 
-    const video = await search(query, args)
+    const result = await search(query, args)
 
-    if (!video) {
+    if (!result) {
       return console.log('Not found 乁(ツ)ㄏ')
     }
 
-    if (args.open) {
-      open(video.link)
-      process.exit()
-    } else {
-      if (args.full) {
-        console.log(video)
+    // Handle --all option (returns array of videos)
+    if (args.all) {
+      if (args.open) {
+        // Open the first video when --all and --open are used together
+        open(result[0].link)
+        process.exit()
       } else {
-        console.log(video.link)
+        if (args.full) {
+          console.log(result)
+        } else {
+          // Print just the links for all videos
+          result.forEach(video => console.log(video.link))
+        }
+      }
+    } else {
+      // Handle single video result
+      if (args.open) {
+        open(result.link)
+        process.exit()
+      } else {
+        if (args.full) {
+          console.log(result)
+        } else {
+          console.log(result.link)
+        }
       }
     }
   }

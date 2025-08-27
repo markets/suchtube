@@ -4,7 +4,7 @@ const youtubeAPI = async (query, options) => {
   const params = {
     q: query,
     key: process.env.SUCHTUBE_YOUTUBE_DATA_API_V3,
-    maxResults: options.random ? 50 : 1,
+    maxResults: options.all ? 50 : (options.random ? 50 : 1),
     part: 'snippet'
   }
 
@@ -71,6 +71,25 @@ export const search = async (query, options = {}) => {
   const videos = await api.youtubeAPI(query, options)
 
   if (videos.length == 0) return
+
+  // If --all option is used, return all videos
+  if (options.all) {
+    return videos.map(video => {
+      let processedVideo = {...video}
+      
+      if (options.time && video.kind != 'channel') {
+        processedVideo.link = video.link + '&t=' + options.time
+
+        if (video.kind == 'video') {
+          processedVideo.linkEmbed = video.linkEmbed + '?start=' + options.time
+        } else {
+          processedVideo.linkEmbed = video.linkEmbed + '&start=' + options.time
+        }
+      }
+      
+      return processedVideo
+    })
+  }
 
   let video
 
