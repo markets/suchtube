@@ -1,10 +1,10 @@
 import open from 'open'
 import { search } from './search.js'
 import * as server from './server.js'
-import { createYargsInstance } from './yargs-config.js'
+import { createQueryParser } from './query-parser.js'
 
-const yargsInstance = createYargsInstance()
-const args = yargsInstance.argv
+const queryParser = createQueryParser()
+const args = queryParser.argv
 
 export const start = async () => {
   if (args.server) {
@@ -15,7 +15,7 @@ export const start = async () => {
   } else {
     const query = args._.join()
     if (!query) {
-      return yargsInstance.showHelp()
+      return queryParser.showHelp()
     }
 
     const result = await search(query, args)

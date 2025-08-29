@@ -1,5 +1,5 @@
 import test from 'ava'
-import { parseArguments } from '../src/yargs-config.js'
+import { parseArguments } from '../src/query-parser.js'
 
 test('parseArguments handles --random alias', t => {
   const args1 = parseArguments('top music 2025 --random')

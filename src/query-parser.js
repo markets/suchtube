@@ -1,12 +1,7 @@
 import yargs from 'yargs'
 import { hideBin } from 'yargs/helpers'
 
-/**
- * Creates a configured yargs instance with all SuchTube options and aliases
- * @param {string[]} argv - The argv array to parse (optional)
- * @returns {yargs.Argv} Configured yargs instance
- */
-export const createYargsInstance = (argv = process.argv) => {
+export const createQueryParser = (argv = process.argv) => {
   return yargs(hideBin(argv))
     .locale('en')
     .usage('Usage: suchtube query [options]')
@@ -54,12 +49,7 @@ export const createYargsInstance = (argv = process.argv) => {
     })
 }
 
-/**
- * Parses command-line arguments using the SuchTube configuration
- * @param {string} argString - String of arguments to parse
- * @returns {object} Parsed arguments object
- */
 export const parseArguments = (argString) => {
   const args = argString.split(' ')
-  return createYargsInstance(args).parse(argString)
+  return createQueryParser(args).parse(argString)
 }
