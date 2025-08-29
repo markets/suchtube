@@ -53,7 +53,7 @@ app.all('/search.:format?', async (req, res) => {
   // Handle --all option: result could be an array or single video
   if (args.all && Array.isArray(result)) {
     videos = result
-    video = result[0] // Use first video for HTML and compatibility formats
+    video = result[0] // Use first video for HTML, Slack and Discord
   } else {
     video = result
     videos = result ? [result] : []
