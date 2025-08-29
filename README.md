@@ -21,6 +21,7 @@ The CLI allows you to search videos without leaving the terminal:
     > suchtube football top goals --random --open
     > suchtube trending videos --duration=short
     > suchtube documentary --duration=long --random
+    > suchtube javascript tutorials --all
 
 Or start the server:
 
@@ -67,7 +68,11 @@ Returns a random video taking into account the given topic.
 
 #### `--duration=short`, `-d=short`
 
-Filters videos by duration. Available values: `any` (default), `short`, `medium`, `long`. Uses YouTube's videoDuration parameter to filter results directly from the API.
+Filters videos by duration. Available values: `any` (default), `short`, `medium`, `long`.
+
+#### `--all`, `-a`
+
+Return all videos from the search.
 
 #### `--open`, `-o` *(CLI only)*
 

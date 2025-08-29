@@ -17,11 +17,6 @@ const responseMultipleVideos = [
     kind: 'video', 
     link: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
     linkEmbed: 'https://www.youtube.com/embed/dQw4w9WgXcQ'
-  },
-  {
-    kind: 'video',
-    link: 'https://www.youtube.com/watch?v=oHg5SJYRHA0',
-    linkEmbed: 'https://www.youtube.com/embed/oHg5SJYRHA0'
   }
 ]
 const responsePlaylist = [{
@@ -84,17 +79,15 @@ test('search non-existent video', async t => {
 test('search with --all option', async t => {
   let videos = await SearchModule.search('multiple videos', { all: true })
   t.is(Array.isArray(videos), true)
-  t.is(videos.length, 3)
+  t.is(videos.length, 2)
   t.is(videos[0].link, responseMultipleVideos[0].link)
   t.is(videos[1].link, responseMultipleVideos[1].link)
-  t.is(videos[2].link, responseMultipleVideos[2].link)
 })
 
 test('search with --all and time option', async t => {
   let videos = await SearchModule.search('multiple videos', { all: true, time: 10 })
   t.is(Array.isArray(videos), true)
-  t.is(videos.length, 3)
+  t.is(videos.length, 2)
   t.is(videos[0].link, responseMultipleVideos[0].link + '&t=10')
   t.is(videos[1].link, responseMultipleVideos[1].link + '&t=10')
-  t.is(videos[2].link, responseMultipleVideos[2].link + '&t=10')
 })
