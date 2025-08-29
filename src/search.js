@@ -4,7 +4,7 @@ const youtubeAPI = async (query, options) => {
   const params = {
     q: query,
     key: process.env.SUCHTUBE_YOUTUBE_DATA_API_V3,
-    maxResults: options.random ? 50 : 1,
+    maxResults: (options.all || options.random) ? 50 : 1,
     part: 'snippet'
   }
 
@@ -62,6 +62,24 @@ const youtubeAPI = async (query, options) => {
   })
 }
 
+// Helper function to apply time parameter to video links
+const applyTimeToVideo = (video, time) => {
+  if (!time || video.kind === 'channel') {
+    return video
+  }
+
+  const processedVideo = {...video}
+  processedVideo.link = video.link + '&t=' + time
+
+  if (video.kind === 'video') {
+    processedVideo.linkEmbed = video.linkEmbed + '?start=' + time
+  } else {
+    processedVideo.linkEmbed = video.linkEmbed + '&start=' + time
+  }
+
+  return processedVideo
+}
+
 // Create an API object that can be stubbed in tests
 export const api = {
   youtubeAPI
@@ -72,6 +90,11 @@ export const search = async (query, options = {}) => {
 
   if (videos.length == 0) return
 
+  // If --all option is used, return all videos
+  if (options.all) {
+    return videos.map(video => applyTimeToVideo(video, options.time))
+  }
+
   let video
 
   if (options.random) {
@@ -81,15 +104,5 @@ export const search = async (query, options = {}) => {
     video = {...videos[0]}
   }
 
-  if (options.time && video.kind != 'channel') {
-    video.link = video.link + '&t=' + options.time
-
-    if (video.kind == 'video') {
-      video.linkEmbed = video.linkEmbed + '?start=' + options.time
-    } else {
-      video.linkEmbed = video.linkEmbed + '&start=' + options.time
-    }
-  }
-
-  return video
+  return applyTimeToVideo(video, options.time)
 }

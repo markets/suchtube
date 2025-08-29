@@ -46,9 +46,18 @@ app.all('/search.:format?', async (req, res) => {
 
   console.log(`[LOG] format: ${format} | query: ${originalQuery}\n`)
 
-  const video = await search(query, args)
+  const result = await search(query, args)
 
-  let videoLink, videoTitle
+  let video, videos, videoLink, videoTitle
+
+  // Handle --all option: result could be an array or single video
+  if (args.all && Array.isArray(result)) {
+    videos = result
+    video = result[0] // Use first video for HTML, Slack and Discord
+  } else {
+    video = result
+    videos = result ? [result] : []
+  }
 
   if (video) {
     videoLink = video.link
@@ -71,9 +80,19 @@ app.all('/search.:format?', async (req, res) => {
       }
     })
   } else if (format == 'text') {
-    res.send(videoLink)
+    // For text format with --all, return all video links
+    if (args.all && videos.length > 1) {
+      res.send(videos.map(v => v.link).join('\n'))
+    } else {
+      res.send(videoLink)
+    }
   } else if (format == 'json') {
-    res.send(video)
+    // For JSON format with --all, return all videos
+    if (args.all && videos.length > 1) {
+      res.send(videos)
+    } else {
+      res.send(video)
+    }
   } else if (format == 'html') {
     let html =
       `<html><body style="background-color: #ccc; padding: 2em; font-family: sans-serif;">
