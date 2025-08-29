@@ -45,7 +45,6 @@
   "devDependencies": {
     "ava": "^6.4.1",
     "nodemon": "^3.1.10",
-    "sinon": "^21.0.0",
-    "supertest": "^7.1.4"
+    "sinon": "^21.0.0"
   }
 }
