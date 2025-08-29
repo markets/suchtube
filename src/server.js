@@ -1,8 +1,7 @@
 import express from 'express'
 import bodyParser from 'body-parser'
-import yargs from 'yargs'
-import { hideBin } from 'yargs/helpers'
 import { search } from './search.js'
+import { parseArguments } from './yargs-config.js'
 import pkg from '../package.json' with { type: 'json' }
 
 const { version } = pkg
@@ -41,7 +40,7 @@ app.all('/search.:format?', async (req, res) => {
     originalQuery = req.query.q || ''
   }
   
-  const args = yargs(hideBin(originalQuery.split(' '))).parse(originalQuery)
+  const args = parseArguments(originalQuery)
   const query = args._.join(" ")
 
   console.log(`[LOG] format: ${format} | query: ${originalQuery}\n`)
