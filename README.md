@@ -80,7 +80,7 @@ Opens the video in your browser.
 
 #### `--full`, `-f` *(CLI only)*
 
-Displays full video's information. It corresponds to hit `GET /search.json?q=` against the server.
+Displays full video's information. It corresponds to hit the `/search.json` endpoint against the server.
 
 ## Usage as a library
 
@@ -123,7 +123,7 @@ The Discord integration responds with the video link in the channel where the co
 
 Any kind of idea, suggestion or bug report are really welcome! Just fork the repo, make your hack and send a pull request.
 
-Thanks to all contributors, you rock :metal:
+Thanks to all contributors, you rock 🙌
 
 ## Development
 
