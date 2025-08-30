@@ -1,10 +1,10 @@
 import open from 'open'
 import { search } from './search.js'
 import * as server from './server.js'
-import { createQueryParser } from './query-parser.js'
+import { createArgumentsParser } from './arguments-parser.js'
 
-const queryParser = createQueryParser()
-const args = queryParser.argv
+const argumentsParser = createArgumentsParser()
+const args = argumentsParser.argv
 
 export const start = async () => {
   if (args.server) {
@@ -15,7 +15,7 @@ export const start = async () => {
   } else {
     const query = args._.join()
     if (!query) {
-      return queryParser.showHelp()
+      return argumentsParser.showHelp()
     }
 
     const result = await search(query, args)

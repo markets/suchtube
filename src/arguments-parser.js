@@ -1,7 +1,7 @@
 import yargs from 'yargs'
 import { hideBin } from 'yargs/helpers'
 
-export const createQueryParser = (argv = process.argv) => {
+export const createArgumentsParser = (argv = process.argv) => {
   return yargs(hideBin(argv))
     .locale('en')
     .usage('Usage: suchtube query [options]')
@@ -51,5 +51,5 @@ export const createQueryParser = (argv = process.argv) => {
 
 export const parseArguments = (argString) => {
   const args = argString.split(' ')
-  return createQueryParser(args).parse(argString)
+  return createArgumentsParser(args).parse(argString)
 }

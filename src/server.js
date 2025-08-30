@@ -1,7 +1,7 @@
 import express from 'express'
 import bodyParser from 'body-parser'
 import { search } from './search.js'
-import { parseArguments } from './query-parser.js'
+import { parseArguments } from './arguments-parser.js'
 import pkg from '../package.json' with { type: 'json' }
 
 const { version } = pkg
